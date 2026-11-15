@@ -178,7 +178,7 @@ const PT = {
   'help':
     'skim-it v0.4\n' +
     '/skim-it                    abre os ajustes (também para qualquer palavra que eu não conheça)\n' +
-    '/skim-it tipografia on|off  títulos um degrau acima e régua entre seções na resposta\n' +
+    '/skim-it tipografia on|off  respostas em seções, títulos um degrau acima e régua entre elas\n' +
     '/skim-it densidade compacto|equilibrado|detalhado  quanto do trabalho do turno aparece\n' +
     '/skim-it look on|off        look base do skim-it no Desktop\n' +
     '/skim-it painel             abre ou fecha o painel de sessões na band\n' +
@@ -239,7 +239,7 @@ const PT = {
   'card.yes': 'Sim',
   'card.no': 'Não',
   'card.typo': 'Tipografia',
-  'card.typoHelp': 'Títulos maiores e uma régua entre as seções da resposta',
+  'card.typoHelp': 'Respostas em seções, com títulos maiores e uma régua entre elas',
   'card.typoOn': 'Ligada',
   'card.typoOff': 'Desligada',
   'card.density': 'Densidade do trabalho',
@@ -407,7 +407,7 @@ const EN: Record<Key, string> = {
   'help':
     'skim-it v0.4\n' +
     '/skim-it                      opens the settings (also for any word I do not know)\n' +
-    '/skim-it typography on|off    headings one step up and a rule between sections in the answer\n' +
+    '/skim-it typography on|off    answers in sections, headings one step up and a rule between them\n' +
     '/skim-it density compact|balanced|detailed  how much of the turn\'s work shows\n' +
     '/skim-it look on|off          skim-it base look on the Desktop\n' +
     '/skim-it panel                opens or closes the sessions panel in the band\n' +
@@ -464,7 +464,7 @@ const EN: Record<Key, string> = {
   'card.yes': 'Yes',
   'card.no': 'No',
   'card.typo': 'Typography',
-  'card.typoHelp': 'Larger headings and a rule between the sections of an answer',
+  'card.typoHelp': 'Answers in sections, with larger headings and a rule between them',
   'card.typoOn': 'On',
   'card.typoOff': 'Off',
   'card.density': 'Work density',

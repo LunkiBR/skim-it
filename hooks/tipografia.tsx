@@ -1,11 +1,24 @@
-// Tipografia da resposta (v0.1): títulos # e ## um degrau acima do corpo, em semibold, e a régua
-// nativa do app (---) antes de cada ##. O resto continua no Markdown do app (tabelas, código, listas).
+// Tipografia da resposta (v0.1): títulos # e ## um degrau acima do corpo e a régua nativa (---)
+// antes de cada ##. O próprio app desenha a resposta inteira, com o texto reescrito (blocks.ts): no
+// Desktop o desenho nativo de uma mensagem aparece uma vez só por árvore (um segundo `next` some), e o
+// Markdown de um mod tem entrelinha menor, fica 5 px à esquerda e não desenha a régua (vistos em
+// 2026-11-15). Tamanho, entrelinha, margem, tabelas, código e links ficam os do app.
 // Arquivo próprio porque o engine só aceita `$` passado a função declarada ou importada pelo nome:
 // work.tsx a importa daqui em vez de recebê-la por parâmetro.
 import { atom, read } from 'claude-code'
 import type { EngineInterface } from 'claude-code'
 
-import { absolutize, splitBlocks } from './blocks'
+import { sections } from './blocks'
+
+// Com a tipografia ligada no Desktop, esta nota vai ao lado de cada pedido (register.tsx, prompt.submit)
+// para o modelo escrever em seções (pedido de 2026-11-15: respostas sempre estruturadas).
+// Resposta curta fica sem título.
+export const SECTIONS_PROMPT = [
+  '# Reply structure (skim-it)',
+  'The person reads your replies in Claude Code Desktop with the skim-it typography on: it draws each `##` heading one step above the body and a rule between sections, so a structured reply can be scanned at a glance.',
+  'When a reply has more than one part or runs past a short paragraph, open with a one-sentence answer or summary, then give each part a `##` heading of a few words and put its body below in short paragraphs, lists or tables.',
+  'Use `###` only inside a section and never `#`. A short reply (a direct answer of a sentence or two) stays without headings.',
+].join('\n')
 
 // O engine lê as referências dos atoms no código-fonte: plugin e key têm de ser literais.
 export const tipografia = atom({ plugin: 'skim-it', key: 'tipografia' } as const, false)
@@ -13,37 +26,6 @@ export const tipografia = atom({ plugin: 'skim-it', key: 'tipografia' } as const
 export async function typography($: EngineInterface, e: any, next: any) {
   const isOn = await read($, tipografia)
   if (e.surface !== 'desktop' || !isOn) return next(e)
-  const text = String(e.props?.text ?? '')
-  const blocks = splitBlocks(text)
-  if (!blocks) return next(e)
-
-  const cwd = String(await $.session.cwd())
-  const { Box, Text, Markdown } = $.ui.resolve(e)
-  return (
-    <Box flexDirection="column">
-      {blocks.map((block, i) =>
-        block.kind === 'heading' ? (
-          <Box key={'h' + i} marginTop={i === 0 ? 0 : 'sm'}>
-            {/* `heading` sai do tamanho do corpo no Desktop (visto em 2026-11-14); `title` é o degrau que aparece. */}
-            <Text size="title" weight="semibold">
-              {block.text}
-            </Text>
-          </Box>
-        ) : block.kind === 'rule' ? (
-          // Espaço antes da régua, como uma linha em branco: a seção anterior respira.
-          // Largura total: numa caixa que encolhe ao conteúdo a régua some (visto em 2026-11-14).
-          <Box key={'r' + i} marginTop="md" width="100%">
-            <Markdown text="---" />
-          </Box>
-        ) : blocks[i - 1]?.kind === 'heading' && block.text.trimStart().startsWith('|') ? (
-          // A tabela não tem margem própria e cola no título (visto em 2026-11-15): uma linha de respiro.
-          <Box key={'m' + i} marginTop="sm">
-            <Markdown text={absolutize(block.text, cwd)} />
-          </Box>
-        ) : (
-          <Markdown key={'m' + i} text={absolutize(block.text, cwd)} />
-        ),
-      )}
-    </Box>
-  )
+  const text = sections(String(e.props?.text ?? ''))
+  return next(text === null ? e : { ...e, props: { ...e.props, text } })
 }

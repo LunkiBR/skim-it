@@ -266,9 +266,10 @@ export async function workPress($: any, e: any): Promise<boolean> {
 export function registerWork(on: any) {
   // Ao vivo: o spinner diz há quanto tempo o turno roda e em que passo está.
   on('ui.render', { component: 'Spinner' }, async ($: any, e: any, next: any) => {
-    if (!live) return next(e)
-    const elapsed = duration((await $.clock.now()) - live.startedAt)
-    const step = live.steps + 1
+    const current = live
+    if (!current) return next(e)
+    const elapsed = duration((await $.clock.now()) - current.startedAt)
+    const step = current.steps + 1
     const base = e.props.message ?? e.props.word
     return next({ ...e, props: { ...e.props, message: base + ' · ' + elapsed + ' · ' + tr(getLang(), 'work.spinner') + ' ' + step } })
   })
@@ -277,12 +278,14 @@ export function registerWork(on: any) {
     // Transcrição completa (ctrl+o, --verbose): o app desenha tudo.
     if (e.props?.isExpanded) return next(e)
     const text = norm(String(e.props?.text ?? ''))
-    if (live && !live.before.has(e.requestId)) {
+    // O turno pode terminar durante o await (live vira null): guarda o turno de agora (visto em 2026-11-15).
+    const current = live
+    if (current && !current.before.has(e.requestId)) {
       // Um bloco antigo redesenhado agora (resposta de um turno terminado) não é deste turno.
       const all = (await read($, turns)) as Record<string, DoneTurn>
       if (!Object.values(all).some(t => t.final === text || t.items.includes('r:' + e.requestId))) {
-        live.blocks[e.requestId] = text
-        if (!live.order.includes('r:' + e.requestId)) live.order.push('r:' + e.requestId)
+        current.blocks[e.requestId] = text
+        if (!current.order.includes('r:' + e.requestId)) current.order.push('r:' + e.requestId)
       }
     }
     addBounded(rendered, e.requestId, RENDERED_MAX)

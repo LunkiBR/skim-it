@@ -47,8 +47,9 @@ Titles, parent sessions and archiving come from the Desktop's own session tools 
 A running subagent's row stays visible, read from `$.agent.list()`.
 
 **Typography.**
-`tipografia.tsx` draws the final answer: `#` and `##` one step up, the app's own rule before each `##`.
-`blocks.ts` splits the Markdown into blocks and makes relative links absolute; an answer with raw HTML, link definitions or footnotes is left as the app draws it.
+`tipografia.tsx` hands the final answer back to the app with its text rewritten by `blocks.ts`: `##` becomes `#`, the one native heading above body size, and the app's own rule (`---`) goes before each `##`.
+The app draws the whole answer once, so size, line height, margins, tables, code and links stay native.
+While typography is on in the Desktop, `register.tsx` attaches a note to each prompt at `prompt.submit` (`context`, read by the model and never shown; the text is `SECTIONS_PROMPT` in `tipografia.tsx`) asking the model to write longer answers in `##` sections.
 
 **Look and color.**
 `look.ts` builds the base look and sends it with `$.theme.set` on `session.start`, `session.attach` and each prompt.

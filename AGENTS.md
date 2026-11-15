@@ -7,7 +7,7 @@ Public repository (MIT); README.md is the user-facing description, docs/ the con
 # Repository Layout
 
 `hooks/` is the hooks module (`hooks.json` names `register.tsx`); `types/index.d.ts` is the state contract.
-`scripts/check-*.mjs` are the Node checks of the pure modules; `scripts/check-all.mjs` runs them (`npm test`).
+`scripts/check-*.mjs` are the Node checks of the pure modules; `scripts/check-all.mjs` runs them (`npm test`). `tests/*.test.tsx` run hooks in the engine's kit (`claude plugin test .`).
 `docs/ARCHITECTURE.md` maps the modules, `docs/DESIGN-SYSTEM.md` holds the tokens, `docs/ENGINE-NOTES.md` what the engine refuses and what the Desktop draws, `docs/research/` the research behind states and color.
 `.agents/memory/` is the agent's local memory for this repo.
 
@@ -30,7 +30,7 @@ Public repository (MIT); README.md is the user-facing description, docs/ the con
 
 # Testing Conventions
 
-`npm test`, `claude plugin validate .` and `npm run typecheck` before calling anything done; validate is the real gate (the engine refuses the whole module on one broken rule, and tsc does not see those rules).
+`npm test`, `claude plugin test .`, `claude plugin validate .` and `npm run typecheck` before calling anything done; validate is the real gate (the engine refuses the whole module on one broken rule, and tsc does not see those rules).
 Logic goes in a pure file with a test in the matching `scripts/check-*.mjs`.
 The checks do not paint the screen: a visible change ends with a look in the app, light and dark (`/skim-it demo` fills the band).
 

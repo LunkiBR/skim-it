@@ -29,7 +29,7 @@
 Rodar cinco ou dez sessões do Claude Code ao mesmo tempo virou normal.
 O Desktop mostra cada uma isolada: para saber qual está esperando por você, é preciso abrir uma por uma.
 Turnos longos enterram a resposta embaixo de ferramentas e narração.
-O skim-it é um mod que resolve as duas coisas sem mudar como o modelo escreve.
+O skim-it é um mod que resolve as duas coisas.
 
 ## Instalação
 
@@ -108,8 +108,8 @@ Três densidades: compacto (uma linha por turno, o padrão), equilibrado (uma li
   <img alt="Uma resposta com os títulos um degrau maiores e uma régua antes da seção Tests" src="https://github.com/LunkiBR/skim-it/raw/media/frames/work-after.jpg" width="880">
 </p>
 
-Títulos um degrau maiores e uma régua entre as seções; tabelas, código e listas ficam como o app desenha.
-Links relativos na resposta viram clicáveis.
+Com a tipografia ligada, o mod pede ao modelo respostas longas em seções: um resumo de uma frase primeiro e um título para cada parte.
+Cada título sai um degrau maior, com uma régua entre as seções; tabelas, código e listas ficam como o app desenha, e uma resposta curta fica como está.
 
 ### Uma band acima do prompt
 
@@ -192,7 +192,7 @@ Os comandos aceitam palavras em português ou inglês (`densidade` ou `density`)
 | Comando | O que faz |
 |---|---|
 | `/skim-it` | Abre o cartão de ajustes |
-| `/skim-it tipografia on\|off` | Títulos maiores e régua entre seções |
+| `/skim-it tipografia on\|off` | Respostas em seções, com títulos maiores e régua entre elas |
 | `/skim-it densidade compacto\|equilibrado\|detalhado` | Quanto do trabalho do turno fica visível |
 | `/skim-it look on\|off` | O look do skim-it no Desktop |
 | `/skim-it fundo segue on\|off` | O look segue o projeto da sessão onde você digitou por último |
@@ -225,6 +225,7 @@ O `/skim-it importar` lê a configuração do Tailwind, variáveis CSS, `tokens.
 ## Privacidade e o que ele executa
 
 - **Arquivos de sessão.** Cada sessão grava um JSON pequeno em `~/.claude/skim-it/fleet/` (raiz do projeto, assunto, estado, horários) para as outras a verem. Nada sai da sua máquina.
+- **Prompt.** Com a tipografia ligada, no Desktop, uma nota curta vai com cada pedido seu, lida só pelo modelo, pedindo respostas em seções. Desligue a tipografia e ela para.
 - **Assunto.** O assunto automático é uma chamada curta ao Haiku por turno, pelo acesso a modelos do próprio Claude Code, com o começo do seu pedido e da resposta.
 - **Ferramentas do Desktop.** Títulos, sessão mãe e arquivamento passam pelas ferramentas de sessão do próprio Desktop. No terminal ou por SSH essas chamadas falham em silêncio e a band usa só os arquivos de sessão.
 - **Processos.** `git` (status, branch, estatística do diff, branches recentes) e `gh` (lista de PRs e checks), só na pasta da sessão. Abrir outra sessão entrega um link `claude://` ou `https://` ao sistema.
@@ -246,7 +247,7 @@ claude --plugin-dir .
 npm test
 ```
 
-Antes de um pull request, rode também `claude plugin validate .` e `npm run typecheck` (depois do primeiro carregamento, que grava os tipos em `.claude-plugin/types/`).
+Antes de um pull request, rode também `claude plugin test .`, `claude plugin validate .` e `npm run typecheck` (depois do primeiro carregamento, que grava os tipos em `.claude-plugin/types/`).
 O [CONTRIBUTING.md](CONTRIBUTING.md) tem os detalhes.
 
 ## Licença

@@ -18,6 +18,7 @@ import { GIT_EVERY_MS, loadGit } from './gitlive'
 import { loadProject } from './projeto'
 import { endsAsking } from './retorno'
 import { voltaPrompt, voltaStart, voltaTurnComplete, voltaTurnStart } from './volta'
+import { SECTIONS_PROMPT } from './tipografia'
 import type { Links } from '../types'
 
 // O engine só aceita read e update de um atom declarado neste arquivo: a mesma referência (plugin e key
@@ -105,7 +106,11 @@ export const register: Register = on => {
     } catch {
       // a frota nunca atrapalha o prompt
     }
-    return next(e)
+    // Tipografia ligada no Desktop: uma nota ao lado do pedido, que só o modelo lê, pede a resposta em
+    // seções ##. O prompt de sistema não serve: o sec-default passa o prompt.compose por cima dos mods
+    // (visto em 2026-11-15). Comando não leva nota.
+    const isStructured = !e.command && (await read($, tipografia)) === true && (await $.session.surfaces().catch((): readonly string[] => [])).includes('desktop')
+    return next(isStructured ? { ...e, context: [...(e.context ?? []), SECTIONS_PROMPT] } : e)
   })
 
   // A cena do fundo: só o Desktop tem espaço atrás da conversa.

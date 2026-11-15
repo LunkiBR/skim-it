@@ -29,7 +29,7 @@
 Running five or ten Claude Code sessions at once is normal now.
 The Desktop shows each one in isolation: to know which session is waiting for you, you open them one by one.
 Long turns bury the answer under tool calls and narration.
-skim-it is a mod that fixes both without changing how the model writes.
+skim-it is a mod that fixes both.
 
 ## Install
 
@@ -108,8 +108,8 @@ Three densities: compact (one line per turn, the default), balanced (one line pe
   <img alt="An answer with its headings one step larger and a rule before the Tests section" src="https://github.com/LunkiBR/skim-it/raw/media/frames/work-after.jpg" width="880">
 </p>
 
-Headings one step larger and a rule between sections, with tables, code and lists left as the app draws them.
-Relative links in the answer become clickable.
+With typography on, the mod asks the model to write longer answers in sections: a one-sentence summary first, then a heading for each part.
+Each heading is drawn one step larger, with a rule between sections; tables, code and lists are left as the app draws them, and a short answer stays as it is.
 
 ### A band above the prompt
 
@@ -192,7 +192,7 @@ Commands take English or Portuguese words (`density` or `densidade`).
 | Command | What it does |
 |---|---|
 | `/skim-it` | Opens the settings card |
-| `/skim-it typography on\|off` | Larger headings and a rule between sections |
+| `/skim-it typography on\|off` | Answers in sections, with larger headings and a rule between them |
 | `/skim-it density compact\|balanced\|detailed` | How much of a turn's work stays visible |
 | `/skim-it look on\|off` | The skim-it look on the Desktop |
 | `/skim-it background follows on\|off` | The look follows the project of the session you typed in last |
@@ -226,6 +226,7 @@ The keys are in Portuguese because the mod was born in Portuguese.
 ## Privacy and what it runs
 
 - **Session files.** Each session writes a small JSON file to `~/.claude/skim-it/fleet/` (project root, subject, state, timestamps) so the other sessions can see it. Nothing leaves your machine.
+- **Prompt.** With typography on, in the Desktop, a short note goes with each of your prompts, read only by the model, asking for answers in sections. Turn typography off and it stops.
 - **Subject.** The automatic subject is one short Haiku call per turn through Claude Code's own model access, with the start of your request and of the answer.
 - **Desktop tools.** Session titles, parent sessions and the archive go through the Desktop's own session tools. In a terminal or over SSH those calls fail quietly and the band uses the session files alone.
 - **Processes.** `git` (status, branch, diff stats, recent branches) and `gh` (PR list and checks), only in the session's folder. Opening another session hands a `claude://` or `https://` link to the system.
@@ -251,7 +252,7 @@ The checks are plain Node scripts for the pure logic (color engine, states, typo
 npm test
 ```
 
-Before a pull request, also run `claude plugin validate .` and `npm run typecheck` (after the first load, which writes the types to `.claude-plugin/types/`).
+Before a pull request, also run `claude plugin test .`, `claude plugin validate .` and `npm run typecheck` (after the first load, which writes the types to `.claude-plugin/types/`).
 [CONTRIBUTING.md](CONTRIBUTING.md) has the details.
 
 ## License

@@ -20,15 +20,17 @@ After the first load the engine writes the API types to `.claude-plugin/types/`,
 
 ## Checks
 
-Run all three before opening a pull request:
+Run all four before opening a pull request:
 
 ```bash
 npm test
+claude plugin test .
 claude plugin validate .
 npm run typecheck
 ```
 
 - `npm test` runs `scripts/check-*.mjs`: plain Node checks of the pure modules (color engine, states, typography, work line, Git parsing, strings).
+- `claude plugin test .` runs `tests/*.test.tsx` against the engine's test kit: a hook mounted on a surface, its tree checked by that surface's rules. The kit does not paint, and it accepts some trees the Desktop draws differently (see [docs/ENGINE-NOTES.md](docs/ENGINE-NOTES.md)).
 - `claude plugin validate .` reads the module the way the engine does. It is the only check that catches the rules in [docs/ENGINE-NOTES.md](docs/ENGINE-NOTES.md), and a broken rule means the whole mod does not load.
 - `npm run typecheck` needs the types the engine wrote on the first load.
 

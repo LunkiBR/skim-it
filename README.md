@@ -8,7 +8,7 @@ It is kept apart from `main` so installing the mod never downloads them.
 | `index.html` | The film page, served at https://lunkibr.github.io/skim-it/ |
 | `film/skim-it.mp4` | The launch film (1:27, 1080p, sound on) |
 | `gifs/` | Short loops cut from the film, 880 px wide |
-| `frames/` | Stills from the film, 1920 x 1080, the README poster and the player's title card |
+| `frames/` | Stills from the film (1920 x 1080), the README poster (1920 x 880) and the player's title card |
 | `brand/` | The logo, for the film page |
 
 The film redraws Claude Code Desktop in code with the mod's own band, colors and backgrounds, and a demo fleet of seven sessions.

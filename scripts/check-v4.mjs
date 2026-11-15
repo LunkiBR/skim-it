@@ -3,6 +3,7 @@
 import assert from 'node:assert/strict'
 import { faixa, faixaParts, FAIXA_LEFT_W, planFleet, tierOf, statusIcon, fleetPiece, gitPiece } from '../hooks/desenho.ts'
 import { demoPeers, sessionStatus } from '../hooks/fleetcore.ts'
+import { ambientScene } from '../hooks/ambient.ts'
 import { textWidth } from '../hooks/measure.ts'
 import { tokens, numeral, contrast, inkFor, svg, icon, themeAnchors, PRIMARY_NEUTRAL } from '../hooks/v4.ts'
 
@@ -127,6 +128,21 @@ test('frota: espera com título, uma sessão a mais na larga, +N quando não cab
   assert.ok(planFleet(items, 300, 'wide').plus > 0)
   assert.ok(gitPiece({ branch: 'main', changes: '· 3 alterações', pr: 'PR #12' }, 250).width > textWidth('main', 12, 500))
   assert.equal(gitPiece({ branch: '', changes: '', pr: '' }, 250), null)
+})
+
+test('fosco: os três estados se distinguem (repouso apagado, trabalhando na cor do projeto, esperando em âmbar)', () => {
+  const num = (s, re) => Number(s.match(re)?.[1])
+  for (const hue of [190, 272]) {
+    const [idle, working, waiting] = ['idle', 'working', 'waiting'].map(state => ambientScene({ hue, state }))
+    const glow = s => num(s, /\.gl\{opacity:([\d.]+)/)
+    const amber = s => num(s, /\.wm\{mix-blend-mode:screen;opacity:([\d.]+)/)
+    const ground = s => s.match(/\.a\{stop-color:(#[0-9a-f]{6})/)?.[1]
+    assert.ok(glow(idle) <= 0.06 && amber(idle) === 0, 'repouso')
+    assert.ok(glow(working) >= 0.4 && amber(working) === 0, 'trabalhando')
+    assert.ok(glow(waiting) === 0 && amber(waiting) >= 0.6, 'esperando')
+    assert.notEqual(ground(idle), ground(working), 'o chão muda com o trabalho')
+    assert.ok(waiting.includes(tokens(hue, true).a9), 'o âmbar é o da band')
+  }
 })
 
 let failed = 0

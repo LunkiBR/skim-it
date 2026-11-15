@@ -8,7 +8,7 @@
 <p align="center">
   A calmer, more scannable Claude Code Desktop.
   <br>
-  One band for every session you run in parallel, one line for every turn of work, and answers you can skim.
+  One line for every turn of work, answers you can skim, and a band that shows every session you run in parallel.
 </p>
 
 <p align="center">
@@ -18,10 +18,9 @@
 </p>
 
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: light)" srcset="docs/images/band-light.png">
-    <img alt="The skim-it band above the prompt: project, session 3 of 10, its subject and state, an alert for the session that needs you, the other sessions by number and state, and the Git line" src="docs/images/band-dark.png" width="820">
-  </picture>
+  <a href="https://github.com/LunkiBR/skim-it/blob/media/film/skim-it.mp4"><img alt="Play the skim-it launch film, 1 minute 27 seconds, with sound" src="https://github.com/LunkiBR/skim-it/raw/media/frames/poster.jpg" width="880"></a>
+  <br>
+  <sub><a href="https://github.com/LunkiBR/skim-it/blob/media/film/skim-it.mp4">Watch the launch film</a> · 1:27 · sound on</sub>
 </p>
 
 ## Why
@@ -31,57 +30,121 @@ The Desktop shows each one in isolation: to know which session is waiting for yo
 Long turns bury the answer under tool calls and narration.
 skim-it is a mod that fixes both without changing how the model writes.
 
-## What it does
+## What changes
 
-### A band above the prompt
+skim-it is not a status bar.
+It changes how the whole Desktop reads, in seven places:
 
-- **Who am I.** The project in its own color, the session number ("3 of 10") and an automatic subject written by Haiku.
-- **What I am doing.** One icon and one word: running, needs you, in the background, ready to review, no signal, idle.
-- **Who needs you.** When another session of the project is waiting for an approval or an answer, an amber line says which one and what it needs, with a button that opens it.
-- **The rest of the fleet.** Every other session of the project by number and state, the waiting ones first.
-- **Git.** Branch, changes and PR with its CI. A click opens a panel with your open PRs, changed files and recent branches.
-- **Sessions panel.** All sessions of the project grouped by state, with parent and child sessions, and a safe bulk archive for the ones idle for over 30 days.
+1. [All the work, in one line](#all-the-work-in-one-line)
+2. [Answers you can skim](#answers-you-can-skim)
+3. [A band above the prompt](#a-band-above-the-prompt)
+4. [The session that needs you comes first](#the-session-that-needs-you-comes-first)
+5. [Every session, by state](#every-session-by-state)
+6. [Every project, its own color](#every-project-its-own-color)
+7. [A background that follows the session](#a-background-that-follows-the-session)
+
+And one card holds every setting: [`/skim-it`](#one-card-for-every-setting).
+
+### All the work, in one line
 
 <p align="center">
-  <img alt="The sessions panel grouped by state: needs you, running, in the background, ready to review, no signal, idle" src="docs/images/sessions-panel.png" width="720">
+  <img alt="A long turn of commands, file reads and narration folds into one line: Worked 7m 57s, 54 steps, 3 files. The answer stays in view." src="https://github.com/LunkiBR/skim-it/raw/media/gifs/work-line.gif" width="880">
 </p>
-
-The band fits four widths, from a wide window down to a single line in a split view.
-
-<p align="center">
-  <img alt="The band at a medium width" src="docs/images/band-medium.png" width="420">
-  <img alt="The band in a narrow window" src="docs/images/band-narrow.png" width="300">
-</p>
-
-### One line per turn
 
 When a turn ends, all its work (commands, file reads, narration, failures) folds into one line: `Worked 7m 57s · 54 steps · 3 files · 1 failure ›`.
 The final answer stays in view.
-A click opens the list.
-A failure never disappears from the line.
+A click opens the list, and a failure never disappears from the line.
 Three densities: compact (one line per turn, the default), balanced (one line per kind of work) and detailed (as the app draws it).
 
+<details>
+<summary>Before, and the line opened</summary>
+<br>
+<p align="center">
+  <img alt="Without skim-it: the answer sits at the bottom of a wall of tool rows" src="https://github.com/LunkiBR/skim-it/raw/media/frames/work-before.jpg" width="880">
+  <img alt="With skim-it: a click on the line lists every step of the turn above the answer" src="https://github.com/LunkiBR/skim-it/raw/media/frames/work-open.jpg" width="880">
+</p>
+</details>
+
 ### Answers you can skim
+
+<p align="center">
+  <img alt="An answer with its headings one step larger and a rule before the Tests section" src="https://github.com/LunkiBR/skim-it/raw/media/frames/work-after.jpg" width="880">
+</p>
 
 Headings one step larger and a rule between sections, with tables, code and lists left as the app draws them.
 Relative links in the answer become clickable.
 
-### A look per project
-
-A calm, high-contrast look: tinted grays, primary text at 7:1 on every surface, color only where it means something.
-Amber is reserved for "needs you"; red, green and amber never stand for a project.
-Each project gets its own color, from your brand file or from a stable hash of the repository, and the look follows the session you typed in last.
+### A band above the prompt
 
 <p align="center">
-  <img alt="The states and their icons, plus the ten session numerals" src="docs/images/states.png" width="300">
-  &nbsp;
   <picture>
-    <source media="(prefers-color-scheme: light)" srcset="docs/images/settings-light.png">
-    <img alt="The skim-it settings card" src="docs/images/settings-dark.png" width="420">
+    <source media="(prefers-color-scheme: light)" srcset="docs/images/band-light.png">
+    <img alt="The skim-it band above the prompt: project, session 3 of 10, its subject and state, an alert for the session that needs you, the other sessions by number and state, and the Git line" src="docs/images/band-dark.png" width="820">
   </picture>
 </p>
 
-> The images are renders of the design file.
+- **Who am I.** The project in its own color, the session number ("3 of 10") and an automatic subject written by Haiku.
+- **What I am doing.** One icon and one word: running, needs you, in the background, ready to review, no signal, idle.
+- **The rest of the fleet.** Every other session of the project by number and state, the waiting ones first.
+- **Git.** Branch, changes and PR with its CI. A click opens a panel with your open PRs, changed files and recent branches.
+
+<details>
+<summary>Four widths, and the states</summary>
+<br>
+<p align="center">
+  The band fits four widths, from a wide window down to a single line in a split view.
+  <br><br>
+  <img alt="The band at a medium width" src="docs/images/band-medium.png" width="420">
+  <img alt="The band in a narrow window" src="docs/images/band-narrow.png" width="300">
+  <br><br>
+  <img alt="The states and their icons, plus the ten session numerals" src="docs/images/states.png" width="300">
+</p>
+</details>
+
+### The session that needs you comes first
+
+<p align="center">
+  <img alt="Another session needs an approval: an amber line says Session 2 needs you, approve Bash, with an Open session 2 button" src="https://github.com/LunkiBR/skim-it/raw/media/gifs/needs-you.gif" width="880">
+</p>
+
+When another session of the project is waiting for an approval or an answer, an amber line says which one and what it needs, with a button that opens it.
+Amber is used for nothing else, so it always means you.
+
+### Every session, by state
+
+<p align="center">
+  <img alt="The sessions panel: needs you, running, in the background, ready to review, no signal and idle, each with its sessions" src="https://github.com/LunkiBR/skim-it/raw/media/frames/panel.jpg" width="880">
+</p>
+
+The sessions panel lists all sessions of the project grouped by state, with whoever is waiting on top, parent and child sessions, and a safe bulk archive for the ones idle for over 30 days.
+
+### Every project, its own color
+
+<p align="center">
+  <img alt="The same window switching between three projects: teal, blue and violet" src="https://github.com/LunkiBR/skim-it/raw/media/gifs/colors.gif" width="880">
+</p>
+
+A calm, high-contrast look: tinted grays, primary text at 7:1 on every surface, color only where it means something.
+Each project gets its own color, from your brand file or from a stable hash of the repository, and the look follows the session you typed in last.
+Red, green and amber never stand for a project.
+
+### A background that follows the session
+
+<p align="center">
+  <img alt="Three backgrounds side by side: calm and nearly gray at rest, the project color while working, amber light at the edges while waiting for you" src="https://github.com/LunkiBR/skim-it/raw/media/gifs/background.gif" width="880">
+</p>
+
+Behind the frosted glass, the background tells you the session's state at a glance: nearly gray at rest, the project's color breathing slowly while it works, and amber light along the edges while it waits for you.
+
+### One card for every setting
+
+<p align="center">
+  <img alt="The skim-it settings card: look, background, typography, work density, project color, brand file, sessions panel and language" src="https://github.com/LunkiBR/skim-it/raw/media/frames/settings.jpg" width="880">
+</p>
+
+Type `/skim-it` and every setting is in one card; each one is also a [command](#commands).
+
+> The film and these images redraw Claude Code Desktop in code with the mod's own band, colors and backgrounds, on a demo fleet of seven sessions like the one `/skim-it demo` shows.
 > In the app the mod draws the same layout with the Desktop's own components, so radius and type follow your Desktop.
 
 ## Install

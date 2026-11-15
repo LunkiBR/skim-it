@@ -79,6 +79,19 @@ In the band's own block the number is in strong text, so it never fights the pro
 | No signal | Crossed-out signal | Neutral |
 | Idle | Moon | Neutral |
 
+## Background
+
+The background is color and light only, so it never competes with text when several sessions sit side by side.
+Each state has a signal you can read from the edges around the frosted glass:
+
+| State | Ground | Light |
+|---|---|---|
+| Idle | Almost gray (30% of the project chroma) | No glow |
+| Working | Project color | Strong project glow in two corners, breathing slowly |
+| Waiting for you | Almost gray again | Amber light along the window edges, strongest at the top, pulsing; the band's amber in dark mode, a lighter gold in light mode |
+
+Amber stays in narrow, bright rims: a wide, faint amber over a dark ground reads as brown.
+
 ## Layout
 
 - Spacing on a 4 px grid; radius from the Desktop's own `borderStyle="round"`, which matches the design's 8 px.

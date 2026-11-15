@@ -18,9 +18,9 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/LunkiBR/skim-it/blob/media/film/skim-it.mp4"><img alt="Assistir ao filme de lançamento do skim-it, 1 minuto e 27 segundos, com som" src="https://github.com/LunkiBR/skim-it/raw/media/frames/poster.jpg" width="880"></a>
+  <a href="https://lunkibr.github.io/skim-it/"><img alt="Assistir ao filme de lançamento do skim-it, 1 minuto e 27 segundos, com som" src="https://github.com/LunkiBR/skim-it/raw/media/frames/poster.jpg" width="880"></a>
   <br>
-  <sub><a href="https://github.com/LunkiBR/skim-it/blob/media/film/skim-it.mp4">Assista ao filme de lançamento</a> · 1:27 · com som, em inglês</sub>
+  <sub><a href="https://lunkibr.github.io/skim-it/">Assista ao filme de lançamento</a> · 1:27 · com som, em inglês</sub>
 </p>
 
 ## Por quê

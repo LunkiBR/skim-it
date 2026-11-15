@@ -14,6 +14,7 @@
 <p align="center">
   <a href="https://github.com/LunkiBR/skim-it/actions/workflows/checks.yml"><img alt="Checks" src="https://github.com/LunkiBR/skim-it/actions/workflows/checks.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-2f8adc"></a>
+  <a href="#requirements"><img alt="Claude Code 2.1.325 or newer" src="https://img.shields.io/badge/Claude%20Code-2.1.325%2B-555"></a>
   <a href="README.pt-BR.md"><img alt="Leia em português" src="https://img.shields.io/badge/leia%20em-portugu%C3%AAs-555"></a>
 </p>
 
@@ -29,6 +30,42 @@ Running five or ten Claude Code sessions at once is normal now.
 The Desktop shows each one in isolation: to know which session is waiting for you, you open them one by one.
 Long turns bury the answer under tool calls and narration.
 skim-it is a mod that fixes both without changing how the model writes.
+
+## Install
+
+At the prompt of a Claude Code session:
+
+```
+/plugin install skim-it --marketplace LunkiBR/skim-it
+```
+
+Answer `y` to add the marketplace, then pick a scope.
+From a shell:
+
+```bash
+claude plugin install skim-it --marketplace LunkiBR/skim-it
+```
+
+Open a new session and type `/skim-it` to see the settings.
+
+### Requirements
+
+- Claude Code 2.1.325 or newer, in the Code tab of Claude Desktop.
+- `git` on the PATH for the Git line, and the [GitHub CLI](https://cli.github.com) signed in for PRs and CI (optional).
+- Built and used daily on Windows; macOS and Linux should work but have not been tested yet.
+
+If another theme mod (such as `/custom-theme`) is on for the same project, the two will trade the look on every message.
+Turn the other one off for that project.
+
+### Update, turn off, uninstall
+
+```bash
+claude plugin update skim-it
+claude plugin disable skim-it
+claude plugin uninstall skim-it
+```
+
+The sessions leave one small file each in `~/.claude/skim-it/fleet/`; delete `~/.claude/skim-it` after uninstalling to remove every trace.
 
 ## What changes
 
@@ -79,7 +116,7 @@ Relative links in the answer become clickable.
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: light)" srcset="docs/images/band-light.png">
-    <img alt="The skim-it band above the prompt: project, session 3 of 10, its subject and state, an alert for the session that needs you, the other sessions by number and state, and the Git line" src="docs/images/band-dark.png" width="820">
+    <img alt="The skim-it band above the prompt: the project, the session number, its subject and state, an alert for the session that needs you, the other sessions by number and state, and the Git line" src="docs/images/band-dark.png" width="820">
   </picture>
 </p>
 
@@ -121,7 +158,7 @@ The sessions panel lists all sessions of the project grouped by state, with whoe
 ### Every project, its own color
 
 <p align="center">
-  <img alt="The same window switching between three projects: teal, blue and violet" src="https://github.com/LunkiBR/skim-it/raw/media/gifs/colors.gif" width="880">
+  <img alt="Three bands, one per project: photo-collector in teal, LIA Task in blue and socialdesign-staging in violet" src="docs/images/band-per-project.png" width="820">
 </p>
 
 A calm, high-contrast look: tinted grays, primary text at 7:1 on every surface, color only where it means something.
@@ -131,7 +168,7 @@ Red, green and amber never stand for a project.
 ### A background that follows the session
 
 <p align="center">
-  <img alt="Three backgrounds side by side: calm and nearly gray at rest, the project color while working, amber light at the edges while waiting for you" src="https://github.com/LunkiBR/skim-it/raw/media/gifs/background.gif" width="880">
+  <img alt="Three backgrounds side by side: calm and nearly gray at rest, the project color while working, amber light at the edges while waiting for you" src="https://github.com/LunkiBR/skim-it/raw/media/frames/background-states.jpg" width="880">
 </p>
 
 Behind the frosted glass, the background tells you the session's state at a glance: nearly gray at rest, the project's color breathing slowly while it works, and amber light along the edges while it waits for you.
@@ -144,34 +181,8 @@ Behind the frosted glass, the background tells you the session's state at a glan
 
 Type `/skim-it` and every setting is in one card; each one is also a [command](#commands).
 
-> The film and these images redraw Claude Code Desktop in code with the mod's own band, colors and backgrounds, on a demo fleet of seven sessions like the one `/skim-it demo` shows.
+> The film and these images redraw Claude Code Desktop from the mod's own design and code (band, colors and backgrounds), on a demo fleet of sessions like the one `/skim-it demo` shows.
 > In the app the mod draws the same layout with the Desktop's own components, so radius and type follow your Desktop.
-
-## Install
-
-At the prompt of a Claude Code session:
-
-```
-/plugin install skim-it --marketplace LunkiBR/skim-it
-```
-
-Answer `y` to add the marketplace, then pick a scope.
-From a shell:
-
-```bash
-claude plugin install skim-it --marketplace LunkiBR/skim-it
-```
-
-Open a new session and type `/skim-it` to see the settings.
-
-### Requirements
-
-- Claude Code 2.1.325 or newer, in the Code tab of Claude Desktop.
-- `git` on the PATH for the Git line, and the [GitHub CLI](https://cli.github.com) signed in for PRs and CI (optional).
-- Built and used daily on Windows; macOS and Linux should work but have not been tested yet.
-
-If another theme mod (such as `/custom-theme`) is on for the same project, the two will trade the look on every message.
-Turn the other one off for that project.
 
 ## Commands
 
@@ -240,7 +251,7 @@ The checks are plain Node scripts for the pure logic (color engine, states, typo
 npm test
 ```
 
-Before a pull request, also run `claude plugin validate .` and, with the types the engine writes to `.claude-plugin/types/` after the first load, `npx -p typescript tsc -p .`.
+Before a pull request, also run `claude plugin validate .` and `npm run typecheck` (after the first load, which writes the types to `.claude-plugin/types/`).
 [CONTRIBUTING.md](CONTRIBUTING.md) has the details.
 
 ## License

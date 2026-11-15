@@ -14,6 +14,7 @@
 <p align="center">
   <a href="https://github.com/LunkiBR/skim-it/actions/workflows/checks.yml"><img alt="Checagens" src="https://github.com/LunkiBR/skim-it/actions/workflows/checks.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="Licença MIT" src="https://img.shields.io/badge/licen%C3%A7a-MIT-2f8adc"></a>
+  <a href="#requisitos"><img alt="Claude Code 2.1.325 ou mais novo" src="https://img.shields.io/badge/Claude%20Code-2.1.325%2B-555"></a>
   <a href="README.md"><img alt="Read in English" src="https://img.shields.io/badge/read%20in-English-555"></a>
 </p>
 
@@ -29,6 +30,42 @@ Rodar cinco ou dez sessões do Claude Code ao mesmo tempo virou normal.
 O Desktop mostra cada uma isolada: para saber qual está esperando por você, é preciso abrir uma por uma.
 Turnos longos enterram a resposta embaixo de ferramentas e narração.
 O skim-it é um mod que resolve as duas coisas sem mudar como o modelo escreve.
+
+## Instalação
+
+No prompt de uma sessão do Claude Code:
+
+```
+/plugin install skim-it --marketplace LunkiBR/skim-it
+```
+
+Responda `y` para adicionar o marketplace e escolha o escopo.
+Pelo terminal:
+
+```bash
+claude plugin install skim-it --marketplace LunkiBR/skim-it
+```
+
+Abra uma sessão nova e digite `/skim-it` para ver os ajustes.
+
+### Requisitos
+
+- Claude Code 2.1.325 ou mais novo, na aba Code do Claude Desktop.
+- `git` no PATH para a linha do Git, e o [GitHub CLI](https://cli.github.com) com login para PRs e CI (opcional).
+- Feito e usado todo dia no Windows; macOS e Linux devem funcionar, mas ainda não foram testados.
+
+Se outro mod de tema (como o `/custom-theme`) estiver ligado no mesmo projeto, os dois trocam o look a cada mensagem.
+Desligue o outro nesse projeto.
+
+### Atualizar, desligar, desinstalar
+
+```bash
+claude plugin update skim-it
+claude plugin disable skim-it
+claude plugin uninstall skim-it
+```
+
+Cada sessão deixa um arquivo pequeno em `~/.claude/skim-it/fleet/`; apague `~/.claude/skim-it` depois de desinstalar para não sobrar nada.
 
 ## O que muda
 
@@ -79,7 +116,7 @@ Links relativos na resposta viram clicáveis.
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: light)" srcset="docs/images/band-light.png">
-    <img alt="A band do skim-it acima do prompt: projeto, sessão 3 de 10, assunto e estado, aviso da sessão que precisa de você, as outras sessões por número e estado, e a linha do Git" src="docs/images/band-dark.png" width="820">
+    <img alt="A band do skim-it acima do prompt: o projeto, o número da sessão, o assunto e o estado, aviso da sessão que precisa de você, as outras sessões por número e estado, e a linha do Git" src="docs/images/band-dark.png" width="820">
   </picture>
 </p>
 
@@ -121,7 +158,7 @@ O painel de sessões lista todas as sessões do projeto agrupadas por estado, co
 ### Cada projeto, a sua cor
 
 <p align="center">
-  <img alt="A mesma janela passando por três projetos: verde-água, azul e violeta" src="https://github.com/LunkiBR/skim-it/raw/media/gifs/colors.gif" width="880">
+  <img alt="Três bands, uma por projeto: photo-collector em verde-água, LIA Task em azul e socialdesign-staging em violeta" src="docs/images/band-per-project.png" width="820">
 </p>
 
 Um look calmo e de alto contraste: cinzas tingidos, texto principal a 7:1 em toda superfície, cor só onde ela significa algo.
@@ -131,7 +168,7 @@ Vermelho, verde e âmbar nunca representam um projeto.
 ### Um fundo que segue a sessão
 
 <p align="center">
-  <img alt="Três fundos lado a lado: calmo e quase cinza em repouso, a cor do projeto trabalhando, luz âmbar nas bordas esperando você" src="https://github.com/LunkiBR/skim-it/raw/media/gifs/background.gif" width="880">
+  <img alt="Três fundos lado a lado: calmo e quase cinza em repouso, a cor do projeto trabalhando, luz âmbar nas bordas esperando você" src="https://github.com/LunkiBR/skim-it/raw/media/frames/background-states.jpg" width="880">
 </p>
 
 Atrás do vidro fosco, o fundo diz o estado da sessão de relance: quase cinza em repouso, a cor do projeto respirando devagar enquanto trabalha, e luz âmbar nas bordas enquanto espera você.
@@ -144,34 +181,8 @@ Atrás do vidro fosco, o fundo diz o estado da sessão de relance: quase cinza e
 
 Digite `/skim-it` e todos os ajustes estão num cartão; cada um também é um [comando](#comandos).
 
-> O filme e estas imagens redesenham o Claude Code Desktop em código com a band, as cores e os fundos do próprio mod, numa frota de demonstração de sete sessões como a que o `/skim-it demo` mostra, em inglês.
+> O filme e estas imagens redesenham o Claude Code Desktop a partir do desenho e do código do próprio mod (band, cores e fundos), numa frota de demonstração como a que o `/skim-it demo` mostra, em inglês.
 > No app o mod desenha o mesmo layout com os componentes do próprio Desktop, então raio e tipografia seguem o seu Desktop.
-
-## Instalação
-
-No prompt de uma sessão do Claude Code:
-
-```
-/plugin install skim-it --marketplace LunkiBR/skim-it
-```
-
-Responda `y` para adicionar o marketplace e escolha o escopo.
-Pelo terminal:
-
-```bash
-claude plugin install skim-it --marketplace LunkiBR/skim-it
-```
-
-Abra uma sessão nova e digite `/skim-it` para ver os ajustes.
-
-### Requisitos
-
-- Claude Code 2.1.325 ou mais novo, na aba Code do Claude Desktop.
-- `git` no PATH para a linha do Git, e o [GitHub CLI](https://cli.github.com) com login para PRs e CI (opcional).
-- Feito e usado todo dia no Windows; macOS e Linux devem funcionar, mas ainda não foram testados.
-
-Se outro mod de tema (como o `/custom-theme`) estiver ligado no mesmo projeto, os dois trocam o look a cada mensagem.
-Desligue o outro nesse projeto.
 
 ## Comandos
 

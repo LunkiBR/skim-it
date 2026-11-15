@@ -43,7 +43,7 @@ h1{font-size:clamp(26px,4vw,38px);line-height:1.15;letter-spacing:-.02em;margin:
 .links a{color:var(--accent);text-decoration:none;font-weight:600}
 .links a:hover{text-decoration:underline}
 footer{margin:72px 0 40px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-align:center}
-@media (max-width:600px){header{padding:18px 0 20px}header img{height:24px}.intro{margin-top:32px}.intro p{font-size:16px}.install code{white-space:normal;overflow-wrap:anywhere}}
+@media (max-width:600px){header{padding:18px 0 20px}header img{height:24px}.intro{margin-top:32px}.intro p{font-size:16px}.install code{white-space:normal}.install code span{white-space:nowrap}}
 </style>
 </head>
 <body>
@@ -71,7 +71,7 @@ footer{margin:72px 0 40px;padding-top:20px;border-top:1px solid var(--line);colo
       <h1>A calmer, more scannable Claude Code Desktop</h1>
       <p>One line for every turn of work, answers you can skim, and a band that shows every session you run in parallel.</p>
       <div class="install">
-        <code id="cmd">/plugin install skim-it --marketplace LunkiBR/skim-it</code>
+        <code id="cmd"><span>/plugin</span> <span>install</span> <span>skim-it</span> <span>--marketplace</span> <span>LunkiBR/skim-it</span></code>
         <button type="button" id="copy">Copy</button>
       </div>
       <div class="links"><a href="https://github.com/LunkiBR/skim-it#readme">Read the README</a></div>

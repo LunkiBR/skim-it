@@ -1,0 +1,6 @@
+{
+  "name": "skim-it",
+  "description": "skim-it, a calmer and more scannable Claude Code Desktop",
+  "owner": { "name": "Leonardo Ramos", "url": "https://github.com/LunkiBR" },
+  "plugins": [{ "name": "skim-it", "source": "./" }]
+}

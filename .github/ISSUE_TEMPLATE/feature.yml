@@ -1,0 +1,16 @@
+name: Idea
+description: Something skim-it could show or do
+labels: [idea]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What is hard today when you work with Claude Code? Describe the moment, not the solution.
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What you would like
+      description: Sketches and screenshots welcome.

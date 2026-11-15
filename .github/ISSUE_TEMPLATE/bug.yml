@@ -1,0 +1,45 @@
+name: Bug report
+description: Something skim-it draws or does is wrong
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you saw, and what you expected instead. A screenshot helps most.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: How to reproduce
+      placeholder: |
+        1. Open two sessions in the same repository
+        2. ...
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      placeholder: Claude Code 2.1.325, Claude Desktop 5.11492.5, skim-it 0.4.0
+    validations:
+      required: true
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Surface
+      options: [Desktop (Code tab), Terminal, Other]
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: System
+      options: [Windows, macOS, Linux]
+    validations:
+      required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: Engine line
+      description: If the mod stopped loading or a hook was skipped, paste the dim line the transcript shows.
+      render: text

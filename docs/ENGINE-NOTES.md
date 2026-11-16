@@ -39,7 +39,10 @@ The engine reads the source before running it and refuses the **whole module** w
 ## Turns and rows
 
 - Rows the Desktop draws (`AssistantMessage`, `ToolGroup`, `ToolUse`) carry no turn id. `e.requestId` is the message id or the `tool_use_id`, so the work line ties rows to turns by message id, never by text.
-- Long intermediate narration is drawn as a summary (`isSummary`) whose text differs from what the model wrote.
+- Long intermediate narration is drawn as a summary whose text differs from what the model wrote, and on the Desktop that summary row never reaches the `AssistantMessage` hook: a mod can neither hide nor restyle it (traced on 2026-11-15).
+- The Desktop draws its own header for a tool group ("Ran 2 commands, read a file ›") whatever the `ToolGroup` hook returns; the hook only decides what the group shows when opened. A rewrite to `isExpanded: true` does not unfold the group into `ToolUse` rows on the Desktop (traced on 2026-11-15).
+- Thinking rows are not a render component: no mod reaches them.
+- A row a hook answers with an empty `Box` still keeps its vertical gap in the transcript.
 - Returning the native rows when the work line opens shows nothing: the Desktop keeps them inside its own collapsed group. The mod draws its own open list.
 - `turn.complete` carries the final visible answer, `durationMs` and `turnId`.
 - `TurnDuration` and `InfoNotice` exist only in the terminal.

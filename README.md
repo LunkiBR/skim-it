@@ -88,9 +88,9 @@ And one card holds every setting: [`/skim-it`](#one-card-for-every-setting).
   <img alt="A long turn of commands, file reads and narration folds into one line: Worked 7m 57s, 54 steps, 3 files. The answer stays in view." src="https://github.com/LunkiBR/skim-it/raw/media/gifs/work-line.gif" width="880">
 </p>
 
-When a turn ends, all its work (commands, file reads, narration, failures) folds into one line: `Worked 7m 57s · 54 steps · 3 files · 1 failure ›`.
-The final answer stays in view.
-A click opens the list, and a failure never disappears from the line.
+When a turn ends, one line sums up all its work (commands, file reads, narration, failures): `Worked 7m 57s · 54 steps · 3 files · 1 failure ›`.
+A click opens every step, and a failure never disappears from the line.
+In the Desktop the line sits right above the answer and the turn's rows stay as the app draws them: the Desktop keeps its tool groups and narration summaries out of a mod's reach. In a terminal the rows fold into the line, as shown here.
 Three densities: compact (one line per turn, the default), balanced (one line per kind of work) and detailed (as the app draws it).
 
 <details>

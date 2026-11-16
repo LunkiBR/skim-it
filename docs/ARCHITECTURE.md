@@ -42,7 +42,7 @@ Titles, parent sessions and archiving come from the Desktop's own session tools 
 `tom.ts` gives this session its tone among the live sessions of the project.
 
 **Work line.**
-`work.tsx` follows the turn (`turn.start`, `turn.step`, `tool.call`, `turn.complete`), hides the rows the Desktop draws for a finished turn, and draws one line in their place that opens on a click.
+`work.tsx` follows the turn (`turn.start`, `turn.step`, `tool.call`, `turn.complete`) and draws one line per finished turn that opens on a click: in a terminal it folds the turn's rows into that line, in the Desktop it sits above the final answer and leaves the rows as the app draws them (the Desktop keeps its tool group headers and narration summaries out of a mod's reach).
 `worklog.ts` keeps the turn record, the summary text and the density rules.
 A running subagent's row stays visible, read from `$.agent.list()`.
 

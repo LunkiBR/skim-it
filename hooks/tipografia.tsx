@@ -18,6 +18,7 @@ export const SECTIONS_PROMPT = [
   'The person reads your replies in Claude Code Desktop with the skim-it typography on: it draws each `##` heading one step above the body and a rule between sections, so a structured reply can be scanned at a glance.',
   'When a reply has more than one part or runs past a short paragraph, open with a one-sentence answer or summary, then give each part a `##` heading of a few words and put its body below in short paragraphs, lists or tables.',
   'Use `###` only inside a section and never `#`. A short reply (a direct answer of a sentence or two) stays without headings.',
+  'Keep writing in the language the person writes in; this note is in English only to be short.',
 ].join('\n')
 
 // O engine lê as referências dos atoms no código-fonte: plugin e key têm de ser literais.

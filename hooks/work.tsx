@@ -119,11 +119,30 @@ export function workAgentDone($: any) {
   $.ui.invalidate('ui.render')
 }
 
+/**
+ * Compacto no Desktop: a linha do turno logo acima da resposta final, e as linhas do turno como o app as
+ * desenha. Lá o cabeçalho "Executou N comandos" de cada grupo, o resumo da narração longa e o pensamento
+ * não passam pelo mod, e uma linha escondida deixa o vão dela (rastro de 2026-11-15).
+ */
+async function answerWithLine($: any, e: any, next: any, id: string, t: DoneTurn) {
+  const { Box } = $.ui.resolve(e)
+  const isOpen = ((await read($, open)) as string[]).includes(id)
+  const dot = await toneHex($).catch(() => undefined)
+  return (
+    <Box flexDirection="column" rowGap={0}>
+      {summaryRow($, e, id, t, isOpen, dot)}
+      {isOpen ? [<Box key="lista">{openList($, e, t)}</Box>] : []}
+      <Box key="resposta" marginTop="sm">{await typography($, e, next)}</Box>
+    </Box>
+  )
+}
+
 /** Recolhe, esconde ou desenha a linha do turno no lugar do primeiro item dele. Texto que não é da linha passa pela tipografia. */
 async function decide($: any, e: any, next: any, keys: string[], isGroup: boolean, isText: boolean) {
   const pass = () => (isText ? typography($, e, next) : next(e))
   const d = await getDensity($)
-  if (d === 'detalhado') return pass()
+  // No Desktop o compacto não esconde linha: a linha do turno vai acima da resposta (answerWithLine).
+  if (d === 'detalhado' || (d === 'compacto' && e.surface === 'desktop')) return pass()
   const agentLive = await isRunningAgent($, e)
   const all = (await read($, turns)) as Record<string, DoneTurn>
   let hit: [string, DoneTurn] | null = null
@@ -289,6 +308,10 @@ export function registerWork(on: any) {
       }
     }
     addBounded(rendered, e.requestId, RENDERED_MAX)
+    if (e.surface === 'desktop' && text && (await getDensity($)) === 'compacto') {
+      const done = Object.entries((await read($, turns)) as Record<string, DoneTurn>).find(([, t]) => t.final === text)
+      if (done) return answerWithLine($, e, next, done[0], done[1])
+    }
     return decide($, e, next, ['r:' + e.requestId, textKey(text)], false, true)
   })
 

@@ -88,9 +88,9 @@ E um cartão guarda todos os ajustes: [`/skim-it`](#um-cartão-para-todos-os-aju
   <img alt="Um turno longo de comandos, leituras e narração recolhe numa linha: trabalhou 7m 57s, 54 passos, 3 arquivos. A resposta fica à vista." src="https://github.com/LunkiBR/skim-it/raw/media/gifs/work-line.gif" width="880">
 </p>
 
-Quando o turno termina, todo o trabalho (comandos, leituras, narração, falhas) recolhe numa linha: `Trabalhou 7m 57s · 54 passos · 3 arquivos · 1 falha ›`.
-A resposta final fica à vista.
-Um clique abre a lista, e uma falha nunca some da linha.
+Quando o turno termina, uma linha resume todo o trabalho (comandos, leituras, narração, falhas): `Trabalhou 7m 57s · 54 passos · 3 arquivos · 1 falha ›`.
+Um clique abre cada passo, e uma falha nunca some da linha.
+No Desktop a linha fica logo acima da resposta e as linhas do turno ficam como o app desenha: os grupos de ferramentas e os resumos da narração do Desktop não estão ao alcance de um mod. No terminal as linhas recolhem na linha, como aqui.
 Três densidades: compacto (uma linha por turno, o padrão), equilibrado (uma linha por tipo de trabalho) e detalhado (como o app desenha).
 
 <details>

@@ -1,6 +1,6 @@
 {
   "name": "skim-it",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "A calm, high-contrast look for Claude Code Desktop: a status band for parallel sessions, one line per turn of work, and answers that are easier to scan.",
   "author": { "name": "Leonardo Ramos", "url": "https://github.com/LunkiBR" },
   "homepage": "https://github.com/LunkiBR/skim-it",

@@ -240,6 +240,14 @@ export const register: Register = on => {
     return joined
   })
 
+  // `/skim-it:ajustes` vem de commands/ajustes.md: um comando em arquivo aparece na lista já na tela de
+  // sessão nova, antes de a sessão registrar o `/skim-it` (visto em 2026-11-17). O mod o responde abrindo
+  // o cartão; o texto do arquivo só chega ao modelo se o mod não carregou.
+  on('command.run', { command: 'skim-it:ajustes' }, async $ => {
+    await openCard($)
+    return { text: tr(getLang(), 'cmd.card') }
+  }).catch(($, e, next) => next(e)) // falhou: o comando roda e o texto do arquivo avisa o modelo
+
   // Os argumentos são lidos em i18n.ts (pt e en); o que cada um faz mora em ajustes.ts, que o cartão
   // de ajustes chama também. Palavra que não conheço abre o cartão e diz a mais perto.
   on('command.run', { command: 'skim-it' }, async ($, e) => {

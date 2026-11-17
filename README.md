@@ -47,6 +47,7 @@ claude plugin install skim-it --marketplace LunkiBR/skim-it
 ```
 
 Open a new session and type `/skim-it` to see the settings.
+Before a session's first message the mod is not running yet, so the list shows `/skim-it:ajustes` instead: it opens the same card.
 
 ### Requirements
 
@@ -192,6 +193,7 @@ Commands take English or Portuguese words (`density` or `densidade`).
 | Command | What it does |
 |---|---|
 | `/skim-it` | Opens the settings card |
+| `/skim-it:ajustes` | Opens the settings card too, and is listed even before a session's first message |
 | `/skim-it typography on\|off` | Answers in sections, with larger headings and a rule between them |
 | `/skim-it density compact\|balanced\|detailed` | How much of a turn's work stays visible |
 | `/skim-it look on\|off` | The skim-it look on the Desktop |

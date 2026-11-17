@@ -47,6 +47,7 @@ claude plugin install skim-it --marketplace LunkiBR/skim-it
 ```
 
 Abra uma sessão nova e digite `/skim-it` para ver os ajustes.
+Antes da primeira mensagem de uma sessão o mod ainda não está rodando, então a lista mostra `/skim-it:ajustes`, que abre o mesmo cartão.
 
 ### Requisitos
 
@@ -192,6 +193,7 @@ Os comandos aceitam palavras em português ou inglês (`densidade` ou `density`)
 | Comando | O que faz |
 |---|---|
 | `/skim-it` | Abre o cartão de ajustes |
+| `/skim-it:ajustes` | Também abre o cartão, e aparece na lista antes mesmo da primeira mensagem |
 | `/skim-it tipografia on\|off` | Respostas em seções, com títulos maiores e régua entre elas |
 | `/skim-it densidade compacto\|equilibrado\|detalhado` | Quanto do trabalho do turno fica visível |
 | `/skim-it look on\|off` | O look do skim-it no Desktop |

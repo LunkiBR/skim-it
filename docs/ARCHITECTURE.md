@@ -26,7 +26,7 @@ New logic goes into the pure side whenever it can, because the checks cannot pai
 ## Modules
 
 **Wiring.**
-`register.tsx` registers every event the mod uses, once each: `session.start` and `session.attach` (look, command, fleet heartbeat), `prompt.submit` (look follows the project, subject draft), `turn.start`, `turn.step`, `turn.complete` and `tool.call` (work line, states), `tool.check` (a pending permission becomes "needs you"), `classic.Stop` (background work, where the host delivers it; background subagents also come from `$.agent.list()`), `command.run` (`/skim-it`) and the `ui.render` hooks.
+`register.tsx` registers every event the mod uses, once each: `session.start` and `session.attach` (look, command, fleet heartbeat), `prompt.submit` (look follows the project, subject draft), `turn.start`, `turn.step`, `turn.complete` and `tool.call` (work line, states), `tool.check` (a pending permission becomes "needs you"), `classic.Stop` (background work, where the host delivers it; background subagents also come from `$.agent.list()`), `command.run` (`/skim-it`, and `/skim-it:ajustes` from `commands/ajustes.md`, which the Desktop lists even before the session runs) and the `ui.render` hooks.
 `ajustes.ts` holds what each setting does, so the command and the settings card call the same functions.
 
 **Band.**

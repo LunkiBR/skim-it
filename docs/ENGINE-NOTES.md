@@ -32,6 +32,7 @@ The engine reads the source before running it and refuses the **whole module** w
 - In a reply, `#` is the only native heading above body size (cap height 13 px against 11); `##` and `###` render at body size, bold.
 - A mod's `Markdown` is not drawn like a reply: tighter line height (21.5 px against 23), about 5 px left of the reply's text, and `---` draws nothing.
 - `next` with rewritten props hands a drawing back to the app. In one tree the app's own drawing of a message shows **once**: a second `next` result in the same tree is dropped on the Desktop, though `claude plugin test` accepts it.
+- A command from `$.command.register` exists only once the session runs: the Desktop's new-session screen lists only commands on disk (skills, a plugin's `commands/*.md`, built-ins). A plugin command on disk is listed as `<plugin>:<name>`, and a `command.run` hook that answers it without `next` keeps its text from the model.
 - `Box` `height` takes a number of cells or a percentage; `"1px"` fails the hook.
 - `prompt.compose` does not reach a mod where the built-in `cc-plugin-sec-default` is seated: it runs first and sends the event past the person's plugins. A changed compose answer also waits for a new thread. To steer how the model writes, attach `context` at `prompt.submit` (read by the model, never shown).
 - `Link` (`href`, `label`) opens a URL; Markdown from a mod makes only `http`, `https` and `file` links clickable.

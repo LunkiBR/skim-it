@@ -320,6 +320,8 @@ function set($: any, patch: Partial<typeof me>) {
   void publish($).catch(() => undefined)
 }
 export const touch = () => void (me.lastEventAt = Date.now())
+// Agente ou comando ainda rodando em segundo plano; despertador marcado não conta, porque até ele tocar nada roda.
+export const hasBackground = () => Boolean(me.background?.agents || me.background?.shells)
 export function fleetPrompt($: any) {
   if (me.base === 'review' || me.askedAtEnd) set($, { base: 'idle', waitingWhat: undefined, askedAtEnd: false })
 }

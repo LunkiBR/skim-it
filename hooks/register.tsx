@@ -13,7 +13,7 @@ import type { SceneState } from './ambient'
 import type { PeerFile } from './fleetcore'
 import { registerWork, loadDensity, editedNow, workStep, workToolDone, workTurnComplete, workTurnStart } from './work'
 import { registerBand } from './band'
-import { fleetCommits, fleetDone, fleetPrompt, fleetResume, fleetStop, fleetWaiting, fleetWorking, retopic, retopicFromSession, startFleet, touch } from './fleet'
+import { fleetCommits, fleetDone, fleetPrompt, fleetResume, fleetStop, fleetWaiting, fleetWorking, hasBackground, retopic, retopicFromSession, startFleet, touch } from './fleet'
 import { GIT_EVERY_MS, loadGit } from './gitlive'
 import { loadProject } from './projeto'
 import { endsAsking } from './retorno'
@@ -36,7 +36,11 @@ let sceneState: SceneState = 'idle'
 let askPendingAt = 0
 let askTool = ''
 let isGitTicking = false
-const ASK_GRACE_MS = 4000
+// Repouso e amarelo só depois de 5 s firmes (pedido de 2026-11-17): o turno curto que a notificação de uma
+// tarefa em segundo plano abre e o classificador do modo automático decidindo não piscam a tela. Só o
+// desenho espera; o agente nem sabe disso.
+const QUIET_MS = 5000
+let idleTimer: { cancel(): void } | undefined
 const sceneCache = new Map<string, string>()
 
 function setScene($: EngineInterface, next: SceneState) {
@@ -44,6 +48,19 @@ function setScene($: EngineInterface, next: SceneState) {
   sceneState = next
   // O fundo já desenhado só muda com um redesenho.
   $.ui.invalidate('ui.render')
+}
+
+// Fim de turno: repouso quando, QUIET_MS depois, nenhum turno roda e nenhum agente ou comando segue em segundo plano.
+function settleIdle($: EngineInterface) {
+  idleTimer?.cancel()
+  idleTimer = $.clock.after(QUIET_MS, () => {
+    idleTimer = undefined
+    void read($, turnoVivo).then(isLive => {
+      if (isLive === true) return
+      if (hasBackground()) settleIdle($)
+      else setScene($, 'idle')
+    })
+  })
 }
 
 function sceneFor(state: SceneState): string {
@@ -140,7 +157,7 @@ export const register: Register = on => {
     await workTurnComplete($, e)
     if (e.agentId === undefined) {
       askPendingAt = 0
-      setScene($, 'idle')
+      settleIdle($)
       try {
         const answered = e.reason === 'answer'
         fleetDone($, editedNow(), answered, answered && endsAsking(String(e.answer ?? '')))
@@ -172,7 +189,7 @@ export const register: Register = on => {
     if ((verdict as { decision?: string } | undefined)?.decision === 'ask') {
       const at = (askPendingAt = await $.clock.now())
       askTool = String(e.tool ?? 'ferramenta')
-      $.clock.after(ASK_GRACE_MS, () => {
+      $.clock.after(QUIET_MS, () => {
         if (askPendingAt !== at) return
         // Só espera se o turno ainda roda (turn.complete já zerou o pedido, mas a tela não mente).
         void read($, turnoVivo).then((running) => {
@@ -181,7 +198,7 @@ export const register: Register = on => {
           fleetWaiting($, ('aprovar ' + askTool) as `aprovar ${string}`)
         })
       })
-    } else if (askPendingAt !== 0 && (await $.clock.now()) - askPendingAt > ASK_GRACE_MS) {
+    } else if (askPendingAt !== 0 && (await $.clock.now()) - askPendingAt > QUIET_MS) {
       // Outra checagem sem pedido, bem depois do aberto: aquele foi resolvido (negado, por exemplo).
       resumeAsk($)
     }

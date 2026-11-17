@@ -173,6 +173,7 @@ Red, green and amber never stand for a project.
 </p>
 
 Behind the frosted glass, the background tells you the session's state at a glance: nearly gray at rest, the project's color breathing slowly while it works, and amber light along the edges while it waits for you.
+It goes to rest or amber only after 5 steady seconds, and stays on the project color while a background agent is still running, so the short turns between background tasks do not make it blink.
 
 ### One card for every setting
 

@@ -173,6 +173,7 @@ Vermelho, verde e âmbar nunca representam um projeto.
 </p>
 
 Atrás do vidro fosco, o fundo diz o estado da sessão de relance: quase cinza em repouso, a cor do projeto respirando devagar enquanto trabalha, e luz âmbar nas bordas enquanto espera você.
+Ele só vai para o repouso ou para o âmbar depois de 5 segundos firmes, e fica na cor do projeto enquanto um agente em segundo plano ainda roda, então os turnos curtos entre tarefas em segundo plano não o fazem piscar.
 
 ### Um cartão para todos os ajustes
 
